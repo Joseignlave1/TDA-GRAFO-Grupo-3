@@ -762,38 +762,79 @@ public class PruebaGrafo {
         // LEER CUIDADOSAMENTE LA CONSIGNA DE ESTE TRABAJO, PUBLICADA EN LA TAREA PARCIAL2_PARTE3
         // LOS COMENTARIOS DEL PRESENTE ARCHIVO NO SUSTITUYEN LO INDICADO EN LA LETRA DE LA TAREA
 
-        TGrafoRedDatos redDatos = (TGrafoRedDatos) UtilGrafos.cargarGrafo("./src/servidores.txt","./src/enlaces.txt",
-                false, TGrafoRedDatos.class);
+//        TGrafoRedDatos redDatos = (TGrafoRedDatos) UtilGrafos.cargarGrafo("./src/servidores.txt","./src/enlaces.txt",
+//                false, TGrafoRedDatos.class);
+//
+//        // cargar grafo con SERVIDORES y ENLACES
+//        //redDatos = (TGrafoRedDatos)UtilGrafos.cargarGrafo...
+//
+//        String servidor1 = "BUF";
+//        String servidor2 = "DFW";
+//        LinkedList<TVertice> ruta = redDatos.rutaMenosSaltos(servidor1, servidor2);
+//        escribirRutaEnArchivo("./src/rutas.txt", servidor1, servidor2, ruta);
+//
+//        servidor2 = "LAS";
+//        ruta = redDatos.rutaMenosSaltos(servidor1, servidor2);
+//        escribirRutaEnArchivo("./src/rutas.txt", servidor1, servidor2, ruta);
+//
+//        servidor2 = "MIA";
+//        ruta = redDatos.rutaMenosSaltos(servidor1, servidor2);
+//        escribirRutaEnArchivo("./src/rutas.txt", servidor1, servidor2, ruta);
+//    }
+//    private static void escribirRutaEnArchivo(String nombreArchivo, String servidor1, String servidor2, LinkedList<TVertice> ruta) {
+//        if (ruta == null) {
+//            System.out.println("No existe una ruta entre " + servidor1 + " y " + servidor2);
+//            return;
+//        }
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Ruta desde ").append(servidor1).append(" hasta ").append(servidor2).append(":");
+//        for (TVertice vertice : ruta) {
+//            sb.append(" ").append(vertice.getEtiqueta());
+//        }
+//        sb.append("\n\n");
+//
+//        ManejadorArchivosGenerico.escribirArchivo(nombreArchivo, new String[]{sb.toString()});
 
-        // cargar grafo con SERVIDORES y ENLACES
-        //redDatos = (TGrafoRedDatos)UtilGrafos.cargarGrafo...
+        //Ejercicio 2 UT8_PD4
+                TVertice verticeA = new TVertice("A");
+                TVertice verticeB = new TVertice("B");
+                TVertice verticeC = new TVertice("C");
+                TVertice verticeD = new TVertice("D");
+                TVertice verticeE  = new TVertice("E");
+                TVertice verticeF  = new TVertice("F");
 
-        String servidor1 = "BUF";
-        String servidor2 = "DFW";
-        LinkedList<TVertice> ruta = redDatos.rutaMenosSaltos(servidor1, servidor2);
-        escribirRutaEnArchivo("./src/rutas.txt", servidor1, servidor2, ruta);
+                TArista aristaAB = new TArista("A", "B", 4);
+                TArista aristaAF = new TArista("A", "F", 2);
+                TArista aristaBC = new TArista("B", "C", 6);
+                TArista aristaBF = new TArista("B", "F", 3);
+                TArista aristaCD = new TArista("C", "D", 8);
+                TArista aristaCE = new TArista("C", "E", 5);
+                TArista aristaDE = new TArista("D", "E", 1);
+                TArista aristaEF = new TArista("E", "F", 7);
 
-        servidor2 = "LAS";
-        ruta = redDatos.rutaMenosSaltos(servidor1, servidor2);
-        escribirRutaEnArchivo("./src/rutas.txt", servidor1, servidor2, ruta);
+                Collection<TVertice> vertices = new ArrayList<>();
+                vertices.add(verticeA);
+                vertices.add(verticeB);
+                vertices.add(verticeC);
+                vertices.add(verticeD);
+                vertices.add(verticeE);
+                vertices.add(verticeF);
+                LinkedList<TArista> aristas = new LinkedList<>();
+                aristas.add(aristaAB);
+                aristas.add(aristaAF);
+                aristas.add(aristaBC);
+                aristas.add(aristaBF);
+                aristas.add(aristaCD);
+                aristas.add(aristaCE);
+                aristas.add(aristaDE);
+                aristas.add(aristaEF);
+                TGrafoNoDirigido grafo = new TGrafoNoDirigido(vertices, aristas);
 
-        servidor2 = "MIA";
-        ruta = redDatos.rutaMenosSaltos(servidor1, servidor2);
-        escribirRutaEnArchivo("./src/rutas.txt", servidor1, servidor2, ruta);
-    }
-    private static void escribirRutaEnArchivo(String nombreArchivo, String servidor1, String servidor2, LinkedList<TVertice> ruta) {
-        if (ruta == null) {
-            System.out.println("No existe una ruta entre " + servidor1 + " y " + servidor2);
-            return;
-        }
+                System.out.println(grafo.estanConectadosConEtiquetaVertices("A","B"));
+                System.out.println(grafo.estanConectados(verticeA,verticeB));
+                //PEDIRLE AYUDA AL PROFE PARA ARREGLAR MÉTODO DE ESTÁNCONECTADOS PASANDOLE LOS VÉRTICES POR PARÁMETRO.
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Ruta desde ").append(servidor1).append(" hasta ").append(servidor2).append(":");
-        for (TVertice vertice : ruta) {
-            sb.append(" ").append(vertice.getEtiqueta());
-        }
-        sb.append("\n\n");
 
-        ManejadorArchivosGenerico.escribirArchivo(nombreArchivo, new String[]{sb.toString()});
     }
 }

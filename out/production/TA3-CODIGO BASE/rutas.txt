@@ -4,3 +4,9 @@ Ruta desde BUF hasta DFW: BUF BWI PIT DFW
 Ruta desde BUF hasta LAS: BUF LAS
 
 
+Ruta desde BUF hasta DFW: BUF BWI PIT DFW
+
+
+Ruta desde BUF hasta LAS: BUF LAS
+
+
