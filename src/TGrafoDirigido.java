@@ -265,7 +265,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
         int n = vertices.size();
         boolean[][] matrizCaminosWarshall = new boolean[n][n];
 
-        //Almacenamos las claves de los vértices para así acceder a la clave i y j
+        ////Almacenamos las claves de los vértices para así acceder a la clave i y j
         List<Comparable> etiquetasVertices = new ArrayList<>(vertices.keySet());
 
         //FORMAMOS LA MATRIZ

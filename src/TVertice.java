@@ -8,6 +8,8 @@ public class TVertice<T> implements IVertice,IVerticeKevinBacon {
     private boolean visitado;
     private T datos;
 
+    private TVertice predecesor;
+
     public Comparable getEtiqueta() {
         return etiqueta;
     }
@@ -17,6 +19,17 @@ public class TVertice<T> implements IVertice,IVerticeKevinBacon {
         return adyacentes;
     }
 
+
+    public TVertice getPredecesor() {
+        return predecesor;
+    }
+
+    /**
+     * @param predecesor the predecesor to set
+     */
+    public void setPredecesor(TVertice predecesor) {
+        this.predecesor = predecesor;
+    }
     public TVertice(Comparable unaEtiqueta) {
         this.etiqueta = unaEtiqueta;
         adyacentes = new LinkedList();
@@ -310,5 +323,39 @@ public class TVertice<T> implements IVertice,IVerticeKevinBacon {
         }
         //Agregamos el elemento al principio de la linkedlist
         resultado.addFirst(this.etiqueta.toString());
+    }
+
+
+    //Parcial de Practica 2021:
+
+    public LinkedList<TVertice> beaHastaDestino(Comparable destino) {
+        Queue<TVertice> colaVertices = new LinkedList<>();
+        Map<TVertice, TVertice> predecesores = new HashMap<>();
+        LinkedList<TVertice> resultado = new LinkedList<>();
+        this.setVisitado(true);
+        colaVertices.offer(this);
+
+        while(!colaVertices.isEmpty()) {
+            TVertice actual = colaVertices.remove();
+            LinkedList<TAdyacencia> adyacentes = actual.getAdyacentes();
+
+            //Cuando las etiquetas coinciden quiere decir que llegamos al final del camino, AÑADIMOS LOS PREDECESORES A LA LISTA PARA FORMAR EL CAMINO
+            if(actual.getEtiqueta().equals(destino)) {
+                while(actual != null) {
+                    resultado.addFirst(actual);
+                    actual = predecesores.get(actual);
+                }
+                return resultado;
+            }
+            for(TAdyacencia y : adyacentes) {
+                TVertice verticeAdyacente = y.getDestino();
+                    if(!verticeAdyacente.getVisitado()) {
+                        verticeAdyacente.setVisitado(true);
+                        colaVertices.offer(verticeAdyacente);
+                        predecesores.put(verticeAdyacente,actual);
+                }
+            }
+        }
+        return null;
     }
 }

@@ -740,22 +740,60 @@ public class PruebaGrafo {
 //        ManejadorArchivosGenerico.escribirArchivo("./src/redelectrica.txt", lineasArchivo);
 
 
+//
+//        TGrafoNoDirigido grafo = (TGrafoNoDirigido) UtilGrafos.cargarGrafo("./src/vert2.txt","./src/ari2.txt",
+//                false, TGrafoNoDirigido.class);
+//
+//        TGrafoNoDirigido arbolExpansionMinima = grafo.Kruskal();
+//        TGrafoNoDirigido AAM = grafo.Prim();
+//
+//
+//        System.out.println("Aristas del Árbol de Expansión Mínima KRUSKAL:");
+//        for (TArista arista : arbolExpansionMinima.getLasAristas()) {
+//            System.out.println(arista.getEtiquetaOrigen() + " - " + arista.getEtiquetaDestino() + " : " + arista.getCosto());
+//        }
+//
+//        System.out.println("Aristas del Árbol de Expansión Mínima PRIM:");
+//        for (TArista arista : AAM.getLasAristas()) {
+//            System.out.println(arista.getEtiquetaOrigen() + " - " + arista.getEtiquetaDestino() + " : " + arista.getCosto());
+//        }
 
-        TGrafoNoDirigido grafo = (TGrafoNoDirigido) UtilGrafos.cargarGrafo("./src/vert2.txt","./src/ari2.txt",
-                false, TGrafoNoDirigido.class);
 
-        TGrafoNoDirigido arbolExpansionMinima = grafo.Kruskal();
-        TGrafoNoDirigido AAM = grafo.Prim();
+        // LEER CUIDADOSAMENTE LA CONSIGNA DE ESTE TRABAJO, PUBLICADA EN LA TAREA PARCIAL2_PARTE3
+        // LOS COMENTARIOS DEL PRESENTE ARCHIVO NO SUSTITUYEN LO INDICADO EN LA LETRA DE LA TAREA
 
+        TGrafoRedDatos redDatos = (TGrafoRedDatos) UtilGrafos.cargarGrafo("./src/servidores.txt","./src/enlaces.txt",
+                false, TGrafoRedDatos.class);
 
-        System.out.println("Aristas del Árbol de Expansión Mínima KRUSKAL:");
-        for (TArista arista : arbolExpansionMinima.getLasAristas()) {
-            System.out.println(arista.getEtiquetaOrigen() + " - " + arista.getEtiquetaDestino() + " : " + arista.getCosto());
+        // cargar grafo con SERVIDORES y ENLACES
+        //redDatos = (TGrafoRedDatos)UtilGrafos.cargarGrafo...
+
+        String servidor1 = "BUF";
+        String servidor2 = "DFW";
+        LinkedList<TVertice> ruta = redDatos.rutaMenosSaltos(servidor1, servidor2);
+        escribirRutaEnArchivo("./src/rutas.txt", servidor1, servidor2, ruta);
+
+        servidor2 = "LAS";
+        ruta = redDatos.rutaMenosSaltos(servidor1, servidor2);
+        escribirRutaEnArchivo("./src/rutas.txt", servidor1, servidor2, ruta);
+
+        servidor2 = "MIA";
+        ruta = redDatos.rutaMenosSaltos(servidor1, servidor2);
+        escribirRutaEnArchivo("./src/rutas.txt", servidor1, servidor2, ruta);
+    }
+    private static void escribirRutaEnArchivo(String nombreArchivo, String servidor1, String servidor2, LinkedList<TVertice> ruta) {
+        if (ruta == null) {
+            System.out.println("No existe una ruta entre " + servidor1 + " y " + servidor2);
+            return;
         }
 
-        System.out.println("Aristas del Árbol de Expansión Mínima PRIM:");
-        for (TArista arista : AAM.getLasAristas()) {
-            System.out.println(arista.getEtiquetaOrigen() + " - " + arista.getEtiquetaDestino() + " : " + arista.getCosto());
+        StringBuilder sb = new StringBuilder();
+        sb.append("Ruta desde ").append(servidor1).append(" hasta ").append(servidor2).append(":");
+        for (TVertice vertice : ruta) {
+            sb.append(" ").append(vertice.getEtiqueta());
         }
+        sb.append("\n\n");
+
+        ManejadorArchivosGenerico.escribirArchivo(nombreArchivo, new String[]{sb.toString()});
     }
 }
