@@ -796,45 +796,75 @@ public class PruebaGrafo {
 //
 //        ManejadorArchivosGenerico.escribirArchivo(nombreArchivo, new String[]{sb.toString()});
 
-        //Ejercicio 2 UT8_PD4
-                TVertice verticeA = new TVertice("A");
-                TVertice verticeB = new TVertice("B");
-                TVertice verticeC = new TVertice("C");
-                TVertice verticeD = new TVertice("D");
-                TVertice verticeE  = new TVertice("E");
-                TVertice verticeF  = new TVertice("F");
+//        //Ejercicio 2 UT8_PD4
+//                TVertice verticeA = new TVertice("A");
+//                TVertice verticeB = new TVertice("B");
+//                TVertice verticeC = new TVertice("C");
+//                TVertice verticeD = new TVertice("D");
+//                TVertice verticeE  = new TVertice("E");
+//                TVertice verticeF  = new TVertice("F");
+//
+//                TArista aristaAB = new TArista("A", "B", 4);
+//                TArista aristaAF = new TArista("A", "F", 2);
+//                TArista aristaBC = new TArista("B", "C", 6);
+//                TArista aristaBF = new TArista("B", "F", 3);
+//                TArista aristaCD = new TArista("C", "D", 8);
+//                TArista aristaCE = new TArista("C", "E", 5);
+//                TArista aristaDE = new TArista("D", "E", 1);
+//                TArista aristaEF = new TArista("E", "F", 7);
+//
+//                Collection<TVertice> vertices = new ArrayList<>();
+//                vertices.add(verticeA);
+//                vertices.add(verticeB);
+//                vertices.add(verticeC);
+//                vertices.add(verticeD);
+//                vertices.add(verticeE);
+//                vertices.add(verticeF);
+//                LinkedList<TArista> aristas = new LinkedList<>();
+//                aristas.add(aristaAB);
+//                aristas.add(aristaAF);
+//                aristas.add(aristaBC);
+//                aristas.add(aristaBF);
+//                aristas.add(aristaCD);
+//                aristas.add(aristaCE);
+//                aristas.add(aristaDE);
+//                aristas.add(aristaEF);
+//                TGrafoNoDirigido grafo = new TGrafoNoDirigido(vertices, aristas);
+//
+//                System.out.println(grafo.estanConectadosConEtiquetaVertices("A","B"));
+//                System.out.println(grafo.estanConectados(verticeA,verticeB));
 
-                TArista aristaAB = new TArista("A", "B", 4);
-                TArista aristaAF = new TArista("A", "F", 2);
-                TArista aristaBC = new TArista("B", "C", 6);
-                TArista aristaBF = new TArista("B", "F", 3);
-                TArista aristaCD = new TArista("C", "D", 8);
-                TArista aristaCE = new TArista("C", "E", 5);
-                TArista aristaDE = new TArista("D", "E", 1);
-                TArista aristaEF = new TArista("E", "F", 7);
+        // 1 - Cargar el Grafo
+        TGrafoRedDatos grafo = UtilGrafos.cargarGrafo("./src/dispositivos.txt", "./src/conexionesParcial2023.txt", false, TGrafoRedDatos.class);
 
-                Collection<TVertice> vertices = new ArrayList<>();
-                vertices.add(verticeA);
-                vertices.add(verticeB);
-                vertices.add(verticeC);
-                vertices.add(verticeD);
-                vertices.add(verticeE);
-                vertices.add(verticeF);
-                LinkedList<TArista> aristas = new LinkedList<>();
-                aristas.add(aristaAB);
-                aristas.add(aristaAF);
-                aristas.add(aristaBC);
-                aristas.add(aristaBF);
-                aristas.add(aristaCD);
-                aristas.add(aristaCE);
-                aristas.add(aristaDE);
-                aristas.add(aristaEF);
-                TGrafoNoDirigido grafo = new TGrafoNoDirigido(vertices, aristas);
+        // 2 - Verificar que los componentes se encuentren conectados
+        boolean conectados = grafo.conectados("CS10","CS60");
+        boolean conectados1 = grafo.conectados("CS30","CS80");
+        boolean conectados2 = grafo.conectados("CS80","CS90");
+        System.out.println("Existe una conexión entre los nodos? CS10 - CS60" + " " + conectados);
+        System.out.println("Existe una conexión entre los nodos? CS30 - CS80" + " " + conectados1);
+        System.out.println("Existe una conexión entre los nodos? CS80 - CS90" + " " + conectados2);
 
-                System.out.println(grafo.estanConectadosConEtiquetaVertices("A","B"));
-                System.out.println(grafo.estanConectados(verticeA,verticeB));
-                //PEDIRLE AYUDA AL PROFE PARA ARREGLAR MÉTODO DE ESTÁNCONECTADOS PASANDOLE LOS VÉRTICES POR PARÁMETRO.
+        // 3 - Leer y cargar archivo mediciones.txt
+//        TDato[] datos = PruebaGrafo.cargarMediciones("./src/main/mediciones.txt");
+//
+//        // 4 - Obtener dato de mayor medicion.
+//        TMedidor medidor = new TMedidor();
+//        TDato mayorMedicion = medidor.obtenerMayorMedicion(datos);
 
+        // 5 - Emitir archivo de salida salida.txt
+        // COMPLETAR CÓDIGO
+        // ManejadorArchivosGenerico.escribirArchivo("src/main/java/salida.txt", vector con lineas del archivo);
+    }
+    private static TDato[] cargarMediciones(String rutaAlArchivo) {
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(rutaAlArchivo, false);
 
+        TDato[] mediciones = new TDato[lineas.length];
+        for (int i = 0; i < lineas.length; i++) {
+            String[] datos = lineas[i].split(",");
+            mediciones[i] = new TDato(Double.parseDouble(datos[1]), Integer.parseInt(datos[0]));
+        }
+
+        return mediciones;
     }
 }

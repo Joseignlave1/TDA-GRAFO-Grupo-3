@@ -128,8 +128,7 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
             return false;
         }
 
-        Set<Comparable> visitados = new HashSet<>();
-        return bpfKruskal(v1, etiquetaVertice2, visitados);
+        return bpfVerificandoConexion(v1, etiquetaVertice2);
     }
 
     public boolean estanConectados(TVertice vertice1, TVertice vertice2) {

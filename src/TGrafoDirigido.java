@@ -347,17 +347,21 @@ public class TGrafoDirigido implements IGrafoDirigido {
     }
 
 
-    public boolean bpfKruskal(TVertice actual, Comparable destino, Set<Comparable> visitados) {
+    public boolean bpfVerificandoConexion(TVertice actual, Comparable destino) {
         if (actual.getEtiqueta().equals(destino)) {
             return true;
         }
 
-        visitados.add(actual.getEtiqueta());
+        actual.setVisitado(true);
         LinkedList<TAdyacencia> adyacentes = actual.getAdyacentes();
         for (TAdyacencia adyacencia : adyacentes) {
             TVertice verticeDestino = adyacencia.getDestino();
-            if (!visitados.contains(verticeDestino.getEtiqueta())) {
-                if (bpfKruskal(verticeDestino, destino, visitados)) {
+            //Primero visitamos el nodo actual, y recorremos los adyancentes, obtenemos el destino de los adyacentes de el nodo
+            //si el destino no fue visitado, hacemos la llamada recursiva, si realizando la recursión obtenemos qué el destino de alguno
+            //de los adyacentes del nodo actual es igual al nodo destino(el nodo el cuál queremos verificar si existe una conexión)
+            //devolvemos true, sino devolvemos false, indicando que no existe tal conexión.
+            if (!verticeDestino.getVisitado()) {
+                if (bpfVerificandoConexion(verticeDestino, destino)) {
                     return true;
                 }
             }
@@ -369,7 +373,6 @@ public class TGrafoDirigido implements IGrafoDirigido {
         if (actual.getEtiqueta().equals(destino)) {
             return true;
         }
-
         visitados.add(actual.getEtiqueta());
         LinkedList<TAdyacencia> adyacentes = actual.getAdyacentes();
         for (TAdyacencia adyacencia : adyacentes) {

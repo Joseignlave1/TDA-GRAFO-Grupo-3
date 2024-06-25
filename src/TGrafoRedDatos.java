@@ -11,7 +11,7 @@ import java.util.LinkedList;
  *
  * @author ernesto
  */
-public class TGrafoRedDatos extends TGrafoNoDirigido implements IGrafoRedDatos {
+public class TGrafoRedDatos extends TGrafoNoDirigido implements IGrafoRedDatos, ITGrafoRedDatos{
 
     public TGrafoRedDatos(Collection<TVertice> vertices, Collection<TArista> aristas) {
         super(vertices, aristas);
@@ -36,4 +36,15 @@ public class TGrafoRedDatos extends TGrafoNoDirigido implements IGrafoRedDatos {
         return  resultado;
     }
 
+    @Override
+    public boolean conectados(Comparable a, Comparable b) {
+        TVertice v1 = buscarVertice(a);
+        TVertice v2 = buscarVertice(b);
+
+        if (v1 == null || v2 == null) {
+            return false;
+        }
+
+        return bpfVerificandoConexion(v1, b);
+    }
 }
