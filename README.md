@@ -1,1 +1,0 @@
-# Segundo-Parcial-2023-Algoritmos
