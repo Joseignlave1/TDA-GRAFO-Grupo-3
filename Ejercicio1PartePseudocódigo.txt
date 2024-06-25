@@ -1,0 +1,44 @@
+Parte 1:
+
+Segundo Parcial Parte 2 2023-
+
+
+
+La idea es utilizar representar los datos con un grafo dirigido, utilizar bpf, si cuando termino de realizar bpf empezando por el vértice de origen, el vértice de destino no fue visitado, entonces quiere decir que los vértices no están conectados.
+
+
+Pre Condiciones:
+
+-El grafo no debe de estar vacío
+
+-la etiqueta de los nodos no debe ser nula
+
+Post Condiciones:
+
+-El algoritmo debe devolver un valor booleano
+
+
+TCiudad.conectados(TVertice nodox, TVertice nodoY) 
+
+  si(nodox.ObtenerEtiqueta = nodoY.ObtenerEtiqueta) O(1)	
+     devolver true
+
+  nodox.visitar() O(1)
+
+  para cada adyacente y en actual.ObtenerAdyacentes() O(n)
+
+    Tvertice verticeDestino  = y.obtenerDestino() O(1)
+
+    si  no verticeDestino.visitar() O(1)
+    
+     si conectados(verticeDestino, destino) O(1)
+        devolver true
+     fin si
+   fin si
+
+   fin para cada
+ 
+devolver falso
+       
+
+Tiempo de ejecución O(V + E)  V = número de vértices E = número de aristas.
