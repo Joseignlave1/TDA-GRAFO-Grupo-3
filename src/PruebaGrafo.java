@@ -855,6 +855,57 @@ public class PruebaGrafo {
         // 5 - Emitir archivo de salida salida.txt
         // COMPLETAR CÓDIGO
         // ManejadorArchivosGenerico.escribirArchivo("src/main/java/salida.txt", vector con lineas del archivo);
+
+        TClasificador clasificador = new TClasificador();
+
+        int[] datos = {64, 34, 25, 12, 22, 11, 90};
+
+        System.out.println("Vector original:");
+        clasificador.imprimirVector(datos);
+        System.out.println();
+
+        // Prueba del método de Inserción
+        int[] datosInsercion = datos.clone();
+        clasificador.clasificar(datosInsercion, TClasificador.METODO_CLASIFICACION_INSERCION);
+        System.out.println("Vector ordenado por Inserción:");
+        clasificador.imprimirVector(datosInsercion);
+        System.out.println();
+
+        // Prueba del método de Shell
+        int[] datosShell = datos.clone();
+        clasificador.clasificar(datosShell, TClasificador.METODO_CLASIFICACION_SHELL);
+        System.out.println("Vector ordenado por Shell:");
+        clasificador.imprimirVector(datosShell);
+        System.out.println();
+
+        // Prueba del método de Burbuja
+        int[] datosBurbuja = datos.clone();
+        clasificador.clasificar(datosBurbuja, TClasificador.METODO_CLASIFICACION_BURBUJA);
+        System.out.println("Vector ordenado por Burbuja:");
+        clasificador.imprimirVector(datosBurbuja);
+        System.out.println();
+
+        // Prueba del método de Quicksort
+        int[] datosQuickSort = datos.clone();
+        clasificador.clasificar(datosQuickSort, TClasificador.METODO_CLASIFICACION_QUICKSORT);
+        System.out.println("Vector ordenado por Quicksort:");
+        clasificador.imprimirVector(datosQuickSort);
+        System.out.println();
+
+        // Prueba del método de HeapSort
+        int[] datosHeapSort = datos.clone();
+        clasificador.ordenarPorHeapSort(datosHeapSort);
+        System.out.println("Vector ordenado por HeapSort:");
+        clasificador.imprimirVector(datosHeapSort);
+        System.out.println();
+
+        // Verificación del orden ascendente
+        System.out.println("Verificación de orden ascendente:");
+        System.out.println("Inserción: " + clasificador.verificarOrdenAscendente(datosInsercion));
+        System.out.println("Shell: " + clasificador.verificarOrdenAscendente(datosShell));
+        System.out.println("Burbuja: " + clasificador.verificarOrdenAscendente(datosBurbuja));
+        System.out.println("Quicksort: " + clasificador.verificarOrdenAscendente(datosQuickSort));
+        System.out.println("HeapSort: " + clasificador.verificarOrdenAscendente(datosHeapSort));
     }
     private static TDato[] cargarMediciones(String rutaAlArchivo) {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(rutaAlArchivo, false);
